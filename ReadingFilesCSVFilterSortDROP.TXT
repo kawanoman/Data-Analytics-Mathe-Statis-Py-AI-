@@ -1,0 +1,137 @@
+# Read from TSV file
+import pandas as pd
+
+
+
+#Coloms chosse a certain colms and certain rows.
+
+#col = ['Name', 'Position']
+employee = pd.read_table('/Users/kawanoman/Desktop/DataTables.tsv')
+
+
+
+#lets try pipe delimited (Name|Salary)
+
+#reads = pd.read_table('/Users/kawanoman/Desktop/Power.txt', sep="|")
+#reads.head()
+
+
+#read_Json = pd.read_json('/Users/kawanoman/Desktop/EmployeeData.json')
+
+
+#read_Json.head()
+
+
+
+#some inbulit methods for data analysis
+
+employee.describe()
+
+employee.dtypes
+
+
+employee.shape
+
+employee.mean()
+
+
+
+#concatenating 2 colms
+
+#employee['Name Salary'] = employee['Name'] + employee['Salary']
+#employee
+
+
+
+#drop a clom
+
+#employee.drop('Office', axis=1,inplace=True)
+#employee.head()
+
+
+#coloms umbenenen
+
+#cols=['Name','Position','Ofc','Age','StartDate','Sal']
+#employee.columns = cols
+#employee
+
+
+#sorting your data
+
+#employee.sort_values(by='Age', ascending= True)
+
+#sorting a series
+
+#employee['Name'].sort_values()
+
+###Filzering where all rows age < 49
+
+#employee[employee.Age < 40]
+#employee[employee.Age < 40 ].head()
+
+##multy filltering critieria
+
+employee[(employee.Age < 40) & (employee.Name == 'Airi Satou') ].head()
+
+##
+
+cols=['Name','Position']
+
+employee[employee.Age < 40][cols].head()
+
+
+###String manipulation
+
+employee.Name.str.upper()
+employee.Name.str.lower()
+
+
+employee.Position.str.contains('Software')
+
+employee[employee.Position.str.contains('Software')]
+
+#Replacing strings
+
+employee.Position.str.replace('Engineer', 'Developer')
+
+
+#Max & Min
+
+employee.Age.min()
+employee.Age.max()
+
+
+#group by a group
+
+employee.groupby('Position').Age.min().head()
+
+employee.groupby('Position').Age.agg(['count','min','max'])
+
+
+#Chossing Loc funktion for a number of rows or cloums .
+
+
+#row 0 and choose all cloums
+employee.loc[0,:]
+
+#rows 0-2 and all cloums
+
+employee.loc[0:2,:]
+
+
+#rows 0-2 and two colms
+
+employee.loc[0:2,['Name','Position']]
+
+
+#rows 0-2 and 0-3 colums
+
+employee.loc[0:2,'Name':'Position']
+
+#rows with certain conditions(Abfragen)
+
+employee.loc[employee.Position == 'Developer', :]
+
+
+
+#
